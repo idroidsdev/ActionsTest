@@ -4,7 +4,6 @@
 //
 //  Created by Matteo Manferdini on 10/09/2019.
 //  Copyright © 2019 Matteo Manferdini. All rights reserved.
-//
 
 import UIKit
 import Apollo
