@@ -1,0 +1,30 @@
+name: iOS Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Set up Xcode
+      uses: actions/setup-xcode@v2
+      with:
+        xcode-version: '12.x' # Specify the desired Xcode version
+        
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install
+        pod install
+    
+    - name: Build and archive
+      run: |
+        xcodebuild clean archive -scheme TopQuestion -archivePath ${{ env.AGENT_TOOLSDIRECTORY }}/YourArchivePath.xcarchive
+        xcodebuild -exportArchive -archivePath YourArchivePath -exportPath YourExportPath -exportOptionsPlist ExportOptions.plist
